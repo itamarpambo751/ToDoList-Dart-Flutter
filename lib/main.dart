@@ -15,6 +15,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  final List _items = [
+    "Floriana Diogo João",
+    "Nadina Neto",
+    "Cristina Nvemba",
+    "Alcina Paquete",
+    "Miriam Peliganga"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +54,16 @@ class _HomeState extends State<Home> {
                 )
               ],
             ),
-          )
+          ),
+          Expanded(child: ListView.builder(
+            padding: const EdgeInsets.only(top: 20.0),
+            itemCount: _items.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(_items[index]),
+              );
+            },
+          ))
         ],
       ),
     );
