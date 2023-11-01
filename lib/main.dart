@@ -67,12 +67,14 @@ class _HomeState extends State<Home> {
             itemBuilder: (context, index) {
               return CheckboxListTile(
                 title: Text(_toDoList[index]["title"]),
-                value: false,
+                value: _toDoList[index]["ok"],
                 secondary: CircleAvatar(
                   child: Icon(_toDoList[index]["ok"] ? Icons.check : Icons.error),
                 ),
                 onChanged: (e) {
-                  
+                  setState(() {
+                    _toDoList[index]["ok"] = e;
+                  });
                 },
               );
             },
