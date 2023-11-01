@@ -33,12 +33,15 @@ class _HomeState extends State<Home> {
                     labelStyle: TextStyle(color: Colors.blue)
                   ),
                 )),
-                ElevatedButton(
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.blueAccent),
+                SizedBox(
+                  height: 40.0,
+                  child: ElevatedButton(
+                    style: const ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(Colors.blueAccent),
+                    ),
+                    onPressed: () {}, 
+                    child: const Text("ADD")
                   ),
-                  onPressed: () {}, 
-                  child: const Text("ADD")
                 )
               ],
             ),
