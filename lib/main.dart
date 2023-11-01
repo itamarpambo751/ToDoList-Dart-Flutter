@@ -16,13 +16,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  final List _items = [
-    "Floriana Diogo João",
-    "Nadina Neto",
-    "Cristina Nvemba",
-    "Alcina Paquete",
-    "Miriam Peliganga"
-  ];
+  final _task = TextEditingController();
+  final List _toDoList = [];
+
+  void _addToDo() {
+    setState(() {
+      Map<String, dynamic> newTask = Map();
+      newTask["title"] = _task.text;
+      newTask["ok"] = false;
+      _task.text = "";
+      _toDoList.add(newTask);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +41,9 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.all(10.0),
             child: Row(
               children: [
-                const Expanded(child: TextField(
-                  decoration: InputDecoration(
+                Expanded(child: TextField(
+                  controller: _task,
+                  decoration: const InputDecoration(
                     labelText: "Nova tarefa",
                     labelStyle: TextStyle(color: Colors.blue)
                   ),
@@ -48,7 +54,7 @@ class _HomeState extends State<Home> {
                     style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.blueAccent),
                     ),
-                    onPressed: () {}, 
+                    onPressed: _addToDo, 
                     child: const Text("ADD")
                   ),
                 )
@@ -57,10 +63,17 @@ class _HomeState extends State<Home> {
           ),
           Expanded(child: ListView.builder(
             padding: const EdgeInsets.only(top: 20.0),
-            itemCount: _items.length,
+            itemCount: _toDoList.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(_items[index]),
+              return CheckboxListTile(
+                title: Text(_toDoList[index]["title"]),
+                value: false,
+                secondary: CircleAvatar(
+                  child: Icon(_toDoList[index]["ok"] ? Icons.check : Icons.error),
+                ),
+                onChanged: (e) {
+                  
+                },
               );
             },
           ))
